@@ -7,58 +7,66 @@
     <meta name="description" content="Dian Linktreee" />
     <title>Dian linktreee</title>
   </head>
-  <body class="bg-image h-screen bg-center bg-no-repeat bg-cover">
+  <body class="bg-image h-screen bg-center bg-no-repeat bg-cover relative">
     <main>
       <div class="container max-w-lg mx-auto pt-10">
         <picture>
-          <img src="/assets/sensei.jpg" class="rounded-full w-32 mx-auto" alt="" />
+          <img src="/assets/sensei.webp" class="rounded-full w-32 mx-auto" alt="sensei dian" />
         </picture>
         <h1 class="text-center text-white font-semibold text-4xl my-2">Dian</h1>
-        <p class="text-center text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+        <p class="text-center text-white">Dian linktreee</p>
 
-        <div class="h-96 mt-5 mx-1 flex flex-col px-5 gap-1">
-          <div
-            class="text-center text-lg flex hover:scale-105 transition active:scale-105justify-between text-white w-full rounded-2xl px-5 bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 text-primary-content"
-          >
-            <i class="bi bi-instagram py-5"></i>
-            <a href="https://instagram.com/diaaanudi" target="_blank" class="flex-1 mx-2 py-5">Instagram</a>
-            <i class="bi bi-copy py-5 cursor-pointer"></i>
-          </div>
+        <div
+          class="h-96 mt-5 mx-1 flex flex-col px-5 gap-1"
+          x-data="links = [{class: 'bi-instagram', link: 'https://instagram.com/diaaanudi', text: 'Instagram'}, {class: 'bi-whatsapp text-green-500', link: 'https://wa.me', text: 'Whatsapp'}, {class: 'bi-github', link: 'https://github.com/dianudi', text: 'Github'}, {class: 'bi-code text-cyan-500', link: 'https://dianudi.github.io/Portfolio', text: 'Portfolio'}, {class: 'bi-robot text-pink-500', link: 'https://wa.me/qr/EB7YQLAXH3AEA1', text: 'Whatsapp Bot'}]"
+        >
+          <template x-for="link in links">
+            <div x-data="{open: false}">
+              <div
+                class="text-center z-10 text-lg flex hover:scale-105 transition active:scale-105justify-between text-white w-full rounded-2xl px-5 bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 text-primary-content"
+              >
+                <i class="bi py-5" :class="link.class"></i>
+                <a href="" :href="link.link" target="_blank" class="flex-1 mx-2 py-5" x-text="link.text">Instagram</a>
 
-          <div
-            class="text-center text-lg flex hover:scale-105 transition active:scale-105 justify-between text-white w-full rounded-2xl px-5 bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 text-primary-content"
-          >
-            <i class="bi bi-whatsapp text-green-500 py-5"></i>
-            <a href="https://wa.me/" target="_blank" class="flex-1 mx-2 py-5">Whatsapp</a>
-            <i class="bi bi-copy py-5 cursor-pointer"></i>
-          </div>
+                <i class="bi bi-three-dots-vertical cursor-pointer py-5" @click="open = true"></i>
+              </div>
+              <div class="absolute z-10 top-0 left-0 flex items-center justify-center w-full h-full bg-transparent" x-show="open">
+                <!-- A basic modal dialog with title, body and one button to close -->
+                <div class="relative h-auto p-4 mx-2 bg-white rounded shadow-xl w-full md:max-w-lg md:p-6 lg:p-8 md:mx-0" @click.away="open = false">
+                  <button @click="open = false" class="absolute right-3 top-3"><i class="bi bi-x text-4xl"></i></button>
+                  <div class="mt-3 text-center sm:mt-0 sm:ml-4">
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Share this link</h3>
 
-          <div
-            class="text-center text-lg flex hover:scale-105 transition active:scale-105 justify-between text-white w-full rounded-2xl px-5 bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 text-primary-content"
-          >
-            <i class="bi bi-github py-5"></i>
-            <a href="https://github.com/dianudi" target="_blank" class="flex-1 mx-2 py-5">Github</a>
-            <i class="bi bi-copy py-5 cursor-pointer"></i>
-          </div>
-
-          <div
-            class="text-center text-lg flex hover:scale-105 transition active:scale-105justify-between text-white w-full rounded-2xl px-5 bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 text-primary-content"
-          >
-            <i class="bi bi-code text-cyan-500 py-5"></i>
-            <a href="https://dianudi.github.io/Portfolio" target="_blank" class="flex-1 mx-2 py-5">Portfolio</a>
-            <i class="bi bi-copy py-5 cursor-pointer"></i>
-          </div>
-
-          <div
-            class="text-center text-lg flex hover:scale-105 transition active:scale-105 justify-between text-white w-full rounded-2xl px-5 bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 text-primary-content"
-          >
-            <i class="bi bi-whatsapp text-green-500 py-5"></i>
-            <a href="https://wa.me/qr/EB7YQLAXH3AEA1" class="flex-1 mx-2 py-5">WA Bot</a>
-            <i class="bi bi-copy py-5 cursor-pointer"></i>
-          </div>
+                    <div
+                      class="mt-2 flex flex-col gap-1 justify-center"
+                      x-data="providers = [{class: 'bi-facebook text-blue-500', link: 'https://www.facebook.com/sharer/sharer.php?u=' + link.link, text: 'Share on Facebook'}, {class: 'bi-whatsapp text-green-500', link: 'https://wa.me/?text=Chekout%20this%link%20' + link.link, text: 'Share via Whatsapp'}, {class: 'bi-messenger text-blue-500', link: 'https://www.messenger.com/new', text: 'Share via Messenger'}, {class: 'bi-twitter-x text-dark', link: 'https://x.com/intent/tweet?text=Chekout%20this%20link%20' + link.link, text: 'Share on X'}, {class: 'bi-snapchat text-orange-500', link: 'snapchat://creativeKitWeb/camera/1?attachmentUrl='+link.link, text: 'Share on SnapChat'}, {class: 'bi-linkedin text-blue-700', link: 'https://www.linkedin.com/sharing/share-offsite/?url=' + link.link, text: 'Share on LinkedIn'}, {class: 'bi-envelope text-pink-500', link: 'mailto:?subject=Checkout this link &body=' + link.link, text: 'Share via Email'}]"
+                    >
+                      <template x-for="provider in providers">
+                        <div class="flex text-lg justify-between gap-2 p-3">
+                          <i class="bi" :class="provider.class"></i>
+                          <a href="" :href="provider.link" target="_blank" x-text="provider.text"></a>
+                          <i class="bi bi-arrow-right animate-pulse"></i>
+                        </div>
+                      </template>
+                      <div x-data="{copy : 'Copy'}">
+                        <button
+                          class="border p-2 rounded-2xl w-full flex gap-2 justify-between active:bg-cyan-200"
+                          @click="() => {copy = 'Copied'; navigator.clipboard && navigator.clipboard.writeText(link.link)}"
+                        >
+                          <span x-text="link.link" class="truncate max-w-56"></span>
+                          <small class="text-blue-600 my-auto" x-text="copy"></small>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
         </div>
       </div>
     </main>
+
     <footer class="container mx-auto">
       <small class="text-white mx-auto block text-center">Linktree Clone &bull; Dianudi</small>
       <small class="text-white mx-auto block text-center">Made with <i class="bi bi-heart-fill text-red-600 animate-pulse"></i> </small>
